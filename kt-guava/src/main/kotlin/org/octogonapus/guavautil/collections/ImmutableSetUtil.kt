@@ -10,6 +10,18 @@ import com.google.common.collect.ImmutableSet
 fun <T> Iterable<T>.toImmutableSet(): ImmutableSet<T> = ImmutableSet.copyOf(this)
 
 fun <T> immutableSetOf(vararg elements: T): ImmutableSet<T> =
-    ImmutableSet.copyOf(elements.toSet())
+        ImmutableSet.copyOf(elements.toSet())
 
 fun <T> emptyImmutableSet(): ImmutableSet<T> = ImmutableSet.of()
+
+// TODO: There could be a better way to implement plus and minus that doesn't involve copying
+operator fun <T> ImmutableSet<T>.plus(other: Iterable<T>): ImmutableSet<T> =
+        ImmutableSet.builder<T>()
+                .addAll(this)
+                .addAll(other)
+                .build()
+
+operator fun <T> ImmutableSet<T>.minus(other: Iterable<T>): ImmutableSet<T> =
+        toMutableSet().apply {
+            removeAll(other)
+        }.toImmutableSet()

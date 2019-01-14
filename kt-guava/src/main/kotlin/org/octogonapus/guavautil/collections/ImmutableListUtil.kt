@@ -14,7 +14,7 @@ fun <T> immutableListOf(vararg elements: T): ImmutableList<T> =
 
 fun <T> emptyImmutableList(): ImmutableList<T> = ImmutableList.of()
 
-operator fun <T> ImmutableList<T>.plus(other: ImmutableList<T>): ImmutableList<T> =
+operator fun <T> ImmutableList<T>.plus(other: Iterable<T>): ImmutableList<T> =
     ImmutableList.builder<T>()
         .addAll(this)
         .addAll(other)
