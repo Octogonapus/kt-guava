@@ -9,7 +9,7 @@ import com.google.common.collect.ImmutableListMultimap
 import com.google.common.collect.Multimap
 
 fun <K, V> Multimap<K, V>.toImmutableListMultimap(): ImmutableListMultimap<K, V> =
-    ImmutableListMultimap.copyOf(this)
+        ImmutableListMultimap.copyOf(this)
 
 fun <K, V> immutableListMultimapOf(vararg pairs: Pair<K, V>): ImmutableListMultimap<K, V> {
     val builder = ImmutableListMultimap.builder<K, V>()
@@ -24,8 +24,8 @@ fun <K, V> immutableListMultimapOf(vararg pairs: Pair<K, V>): ImmutableListMulti
 fun <K, V> emptyImmutableListMultimap(): ImmutableListMultimap<K, V> = ImmutableListMultimap.of()
 
 operator fun <K, V> ImmutableListMultimap<K, V>.plus(other: ImmutableListMultimap<K, V>):
-    ImmutableListMultimap<K, V> =
-    ImmutableListMultimap.builder<K, V>()
-        .putAll(this)
-        .putAll(other)
-        .build()
+        ImmutableListMultimap<K, V> =
+        ImmutableListMultimap.builder<K, V>()
+                .putAll(this)
+                .putAll(other)
+                .build()

@@ -9,8 +9,7 @@ import com.google.common.collect.ImmutableSet
 
 fun <T> Iterable<T>.toImmutableSet(): ImmutableSet<T> = ImmutableSet.copyOf(this)
 
-fun <T> immutableSetOf(vararg elements: T): ImmutableSet<T> =
-        ImmutableSet.copyOf(elements.toSet())
+fun <T> immutableSetOf(vararg elements: T): ImmutableSet<T> = ImmutableSet.copyOf(elements.toSet())
 
 fun <T> emptyImmutableSet(): ImmutableSet<T> = ImmutableSet.of()
 
