@@ -1,6 +1,6 @@
-import GuavaUtil_gradle.Strings.spotlessLicenseHeaderDelimiter
-import GuavaUtil_gradle.Versions.guavaUtilVersion
-import GuavaUtil_gradle.Versions.ktlintVersion
+import Kt_guava_gradle.Strings.spotlessLicenseHeaderDelimiter
+import Kt_guava_gradle.Versions.ktGuavaVersion
+import Kt_guava_gradle.Versions.ktlintVersion
 import com.github.spotbugs.SpotBugsTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
@@ -24,24 +24,24 @@ plugins {
 
 object Versions {
     const val ktlintVersion = "0.29.0"
-    const val guavaUtilVersion = "0.0.2"
+    const val ktGuavaVersion = "0.0.2"
 }
 
 allprojects {
-    version = guavaUtilVersion
+    version = ktGuavaVersion
     group = "org.octogonapus"
 }
 
-val guavaUtilProject = project(":GuavaUtil")
+val ktGuavaProject = project(":kt-guava")
 
 val kotlinProjects = setOf(
-    guavaUtilProject
+    ktGuavaProject
 )
 
 val javaProjects = setOf<Project>() + kotlinProjects
 
 val publishedProjects = setOf(
-    guavaUtilProject
+    ktGuavaProject
 )
 
 object Versions {
@@ -217,7 +217,7 @@ configure(javaProjects) {
             indentWithSpaces(2)
             endWithNewline()
             licenseHeaderFile(
-                "${rootProject.rootDir}/config/spotless/guava-util.license",
+                "${rootProject.rootDir}/config/spotless/kt-guava.license",
                 spotlessLicenseHeaderDelimiter
             )
         }
@@ -314,7 +314,7 @@ configure(kotlinProjects) {
             indentWithSpaces(2)
             endWithNewline()
             licenseHeaderFile(
-                "${rootProject.rootDir}/config/spotless/guava-util.license",
+                "${rootProject.rootDir}/config/spotless/kt-guava.license",
                 spotlessLicenseHeaderDelimiter
             )
         }
@@ -369,21 +369,21 @@ configure(publishedProjects) {
     task<Jar>("sourcesJar") {
         from(sourceSets.main.get().allSource)
         classifier = "sources"
-        baseName = "guavautil-${this@configure.name.toLowerCase()}"
+        baseName = "kt-guava-${this@configure.name.toLowerCase()}"
     }
 
     task<Jar>("javadocJar") {
         from(tasks.javadoc)
         classifier = "javadoc"
-        baseName = "guavautil-${this@configure.name.toLowerCase()}"
+        baseName = "kt-guava-${this@configure.name.toLowerCase()}"
     }
 
-    val publicationName = "publication-guavautil-${name.toLowerCase()}"
+    val publicationName = "publication-kt-guava-${name.toLowerCase()}"
 
     publishing {
         publications {
             create<MavenPublication>(publicationName) {
-                artifactId = "guavautil-${this@configure.name.toLowerCase()}"
+                artifactId = "kt-guava-${this@configure.name.toLowerCase()}"
                 from(components["java"])
                 artifact(tasks["sourcesJar"])
                 artifact(tasks["javadocJar"])
@@ -397,14 +397,14 @@ configure(publishedProjects) {
         setPublications(publicationName)
         with(pkg) {
             repo = "maven-artifacts"
-            name = "GuavaUtil"
+            name = "kt-guava"
             userOrg = "octogonapus"
             publish = true
             setLicenses("MPL-2.0")
-            vcsUrl = "https://github.com/Octogonapus/GuavaUtil.git"
-            githubRepo = "https://github.com/Octogonapus/GuavaUtil"
+            vcsUrl = "https://github.com/Octogonapus/kt-guava.git"
+            githubRepo = "https://github.com/Octogonapus/kt-guava"
             with(version) {
-                name = guavaUtilVersion
+                name = ktGuavaVersion
                 desc = "Kotlin Guava collections utilities."
             }
         }
