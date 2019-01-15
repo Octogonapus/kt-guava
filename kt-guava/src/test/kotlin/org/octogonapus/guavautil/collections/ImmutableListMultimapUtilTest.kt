@@ -40,12 +40,22 @@ internal class ImmutableListMultimapUtilTest {
     }
 
     @Test
-    fun `test plus`() {
+    fun `test plus with multimap`() {
         val multimap = ArrayListMultimap.create<Int, Int>()
         multimap.put(0, 1)
         multimap.put(1, 2)
 
         val immutableMultimap = immutableListMultimapOf(0 to 1) + immutableListMultimapOf(1 to 2)
+
+        assertEquals(multimap.asMap(), immutableMultimap.asMap())
+    }
+    @Test
+    fun `test plus with iterable of entries`() {
+        val multimap = ArrayListMultimap.create<Int, Int>()
+        multimap.put(0, 1)
+        multimap.put(1, 2)
+
+        val immutableMultimap = immutableListMultimapOf(0 to 1) + mapOf(1 to 2).entries
 
         assertEquals(multimap.asMap(), immutableMultimap.asMap())
     }

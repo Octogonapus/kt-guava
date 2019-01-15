@@ -29,3 +29,11 @@ operator fun <K, V> ImmutableListMultimap<K, V>.plus(other: Multimap<K, V>):
                 .putAll(this)
                 .putAll(other)
                 .build()
+
+@Suppress("UnstableApiUsage")
+operator fun <K, V> ImmutableListMultimap<K, V>.plus(other: Iterable<Map.Entry<K, V>>):
+        ImmutableListMultimap<K, V> =
+        ImmutableListMultimap.builder<K, V>()
+                .putAll(this)
+                .putAll(other)
+                .build()
