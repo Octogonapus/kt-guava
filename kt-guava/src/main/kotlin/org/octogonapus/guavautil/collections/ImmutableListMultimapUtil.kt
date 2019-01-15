@@ -23,7 +23,7 @@ fun <K, V> immutableListMultimapOf(vararg pairs: Pair<K, V>): ImmutableListMulti
 
 fun <K, V> emptyImmutableListMultimap(): ImmutableListMultimap<K, V> = ImmutableListMultimap.of()
 
-operator fun <K, V> ImmutableListMultimap<K, V>.plus(other: ImmutableListMultimap<K, V>):
+operator fun <K, V> ImmutableListMultimap<K, V>.plus(other: Multimap<K, V>):
         ImmutableListMultimap<K, V> =
         ImmutableListMultimap.builder<K, V>()
                 .putAll(this)

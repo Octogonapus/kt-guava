@@ -23,7 +23,7 @@ fun <K, V> immutableSetMultimapOf(vararg pairs: Pair<K, V>): ImmutableSetMultima
 
 fun <K, V> emptyImmutableSetMultimap(): ImmutableSetMultimap<K, V> = ImmutableSetMultimap.of()
 
-operator fun <K, V> ImmutableSetMultimap<K, V>.plus(other: ImmutableSetMultimap<K, V>):
+operator fun <K, V> ImmutableSetMultimap<K, V>.plus(other: Multimap<K, V>):
         ImmutableSetMultimap<K, V> =
         ImmutableSetMultimap.builder<K, V>()
                 .putAll(this)
