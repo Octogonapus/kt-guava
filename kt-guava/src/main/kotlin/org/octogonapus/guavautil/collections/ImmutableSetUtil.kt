@@ -15,12 +15,12 @@ fun <T> emptyImmutableSet(): ImmutableSet<T> = ImmutableSet.of()
 
 // TODO: There could be a better way to implement plus and minus that doesn't involve copying
 operator fun <T> ImmutableSet<T>.plus(other: Iterable<T>): ImmutableSet<T> =
-        ImmutableSet.builder<T>()
-                .addAll(this)
-                .addAll(other)
-                .build()
+    ImmutableSet.builder<T>()
+        .addAll(this)
+        .addAll(other)
+        .build()
 
 operator fun <T> ImmutableSet<T>.minus(other: Iterable<T>): ImmutableSet<T> =
-        toMutableSet().apply {
-            removeAll(other)
-        }.toImmutableSet()
+    toMutableSet().apply {
+        removeAll(other)
+    }.toImmutableSet()
