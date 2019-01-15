@@ -4,3 +4,6 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/wopq3e87j1jnvybd?svg=true)](https://ci.appveyor.com/project/Octogonapus/kt-guava/branch/master)
 [![codecov](https://codecov.io/gh/Octogonapus/kt-guava/branch/master/graph/badge.svg)](https://codecov.io/gh/Octogonapus/kt-guava)
 [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)
+
+kt-guava is a collection of extension functions and other utilities on Guava's collections API
+intended to naturally adapt it to Kotlin's syntax and style.
