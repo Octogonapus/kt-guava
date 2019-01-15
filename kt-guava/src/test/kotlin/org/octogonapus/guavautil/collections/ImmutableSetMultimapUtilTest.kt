@@ -49,6 +49,7 @@ internal class ImmutableSetMultimapUtilTest {
 
         assertEquals(multimap.asMap(), immutableMultimap.asMap())
     }
+
     @Test
     fun `test plus with iterable of entries`() {
         val multimap = HashMultimap.create<Int, Int>()
