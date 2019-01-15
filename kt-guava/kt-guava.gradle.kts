@@ -2,7 +2,7 @@ plugins {
     `java-library`
 }
 
-description = "Kotlin Guava collections utilities."
+description = "Guava collections utilities for Kotlin."
 
 checkstyle {
     configFile = file("${rootProject.rootDir}/config/checkstyle/checkstyle.xml")
