@@ -7,7 +7,7 @@ buildCache {
 
 rootProject.name = "kt-guava"
 
-include(":kt-guava")
+include(":core")
 
 /**
  * This configures the gradle build so we can use non-standard build file names.

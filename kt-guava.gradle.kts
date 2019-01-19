@@ -32,16 +32,16 @@ allprojects {
     group = "org.octogonapus"
 }
 
-val ktGuavaProject = project(":kt-guava")
+val coreProject = project(":core")
 
 val kotlinProjects = setOf(
-    ktGuavaProject
+    coreProject
 )
 
 val javaProjects = setOf<Project>() + kotlinProjects
 
 val publishedProjects = setOf(
-    ktGuavaProject
+    coreProject
 )
 
 object Versions {
