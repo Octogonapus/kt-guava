@@ -19,3 +19,8 @@ operator fun <T> ImmutableList<T>.plus(other: Iterable<T>): ImmutableList<T> =
         .addAll(this)
         .addAll(other)
         .build()
+
+operator fun <T> ImmutableList<T>.minus(other: Iterable<T>): ImmutableList<T> =
+    toMutableList().apply {
+        removeAll(other)
+    }.toImmutableList()

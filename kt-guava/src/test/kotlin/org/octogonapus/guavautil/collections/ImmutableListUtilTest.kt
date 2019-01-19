@@ -44,4 +44,16 @@ internal class ImmutableListUtilTest {
         val immutableList = immutableListOf(1, 2) + immutableListOf(3, 4)
         assertEquals(manualList, immutableList)
     }
+
+    @Test
+    fun `test minus`() {
+        val manualList1 = listOf(1, 2, 3)
+        val manualList2 = listOf(2)
+        val manualDifference = manualList1.toMutableList()
+        manualDifference.removeAll(manualList2)
+
+        val immutableList = immutableListOf(1, 2, 3) - immutableListOf(2)
+
+        assertEquals(manualDifference, immutableList)
+    }
 }

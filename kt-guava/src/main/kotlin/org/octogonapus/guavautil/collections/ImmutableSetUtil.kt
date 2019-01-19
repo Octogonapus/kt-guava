@@ -13,7 +13,6 @@ fun <T> immutableSetOf(vararg elements: T): ImmutableSet<T> = ImmutableSet.copyO
 
 fun <T> emptyImmutableSet(): ImmutableSet<T> = ImmutableSet.of()
 
-// TODO: There could be a better way to implement plus and minus that doesn't involve copying
 operator fun <T> ImmutableSet<T>.plus(other: Iterable<T>): ImmutableSet<T> =
     ImmutableSet.builder<T>()
         .addAll(this)
