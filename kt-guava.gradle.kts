@@ -24,7 +24,7 @@ plugins {
 
 object Versions {
     const val ktlintVersion = "0.29.0"
-    const val ktGuavaVersion = "0.0.2"
+    const val ktGuavaVersion = "0.0.1"
 }
 
 allprojects {
@@ -147,14 +147,7 @@ configure(javaProjects) {
     }
 
     tasks.withType<Test> {
-        extensions.configure(typeOf<JacocoTaskExtension>()) {
-            /*
-             * Fix for Jacoco breaking Build Cache support.
-             * https://github.com/gradle/gradle/issues/5269
-             */
-            isAppend = false
-        }
-
+        @Suppress("UnstableApiUsage")
         useJUnitPlatform {
             filter {
                 includeTestsMatching("*Test")
@@ -198,10 +191,12 @@ configure(javaProjects) {
             exceptionFormat = TestExceptionFormat.FULL
         }
 
+        @Suppress("UnstableApiUsage")
         reports.junitXml.destination = file("${rootProject.buildDir}/test-results/${project.name}")
     }
 
     tasks.withType<JacocoReport> {
+        @Suppress("UnstableApiUsage")
         reports {
             html.isEnabled = true
             xml.isEnabled = true
@@ -216,6 +211,7 @@ configure(javaProjects) {
             trimTrailingWhitespace()
             indentWithSpaces(2)
             endWithNewline()
+            @Suppress("INACCESSIBLE_TYPE")
             licenseHeaderFile(
                 "${rootProject.rootDir}/config/spotless/kt-guava.license",
                 spotlessLicenseHeaderDelimiter
@@ -233,6 +229,7 @@ configure(javaProjects) {
     }
 
     tasks.withType<SpotBugsTask> {
+        @Suppress("UnstableApiUsage")
         reports {
             xml.isEnabled = false
             emacs.isEnabled = false
@@ -313,6 +310,7 @@ configure(kotlinProjects) {
             trimTrailingWhitespace()
             indentWithSpaces(2)
             endWithNewline()
+            @Suppress("INACCESSIBLE_TYPE")
             licenseHeaderFile(
                 "${rootProject.rootDir}/config/spotless/kt-guava.license",
                 spotlessLicenseHeaderDelimiter
@@ -332,6 +330,7 @@ configure(kotlinProjects) {
 }
 
 configure(javaProjects + kotlinProjects) {
+    @Suppress("UnstableApiUsage")
     val createPropertiesTask = tasks.register("createProperties") {
         dependsOn("processResources")
         doLast {
