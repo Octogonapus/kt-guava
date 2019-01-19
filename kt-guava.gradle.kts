@@ -397,7 +397,6 @@ configure(publishedProjects) {
         with(pkg) {
             repo = "maven-artifacts"
             name = "kt-guava"
-            userOrg = "octogonapus"
             publish = true
             setLicenses("MPL-2.0")
             vcsUrl = "https://github.com/Octogonapus/kt-guava.git"
