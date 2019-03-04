@@ -1,12 +1,12 @@
+
 import Kt_guava_gradle.Strings.spotlessLicenseHeaderDelimiter
 import Kt_guava_gradle.Versions.ktGuavaVersion
 import Kt_guava_gradle.Versions.ktlintVersion
 import com.github.spotbugs.SpotBugsTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.gradle.api.tasks.testing.Test
 import org.gradle.util.GFileUtils
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.nio.file.Paths
 import java.util.Properties
 
@@ -24,7 +24,7 @@ plugins {
 
 object Versions {
     const val ktlintVersion = "0.29.0"
-    const val ktGuavaVersion = "0.0.1"
+    const val ktGuavaVersion = "0.0.2"
 }
 
 allprojects {
