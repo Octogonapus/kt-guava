@@ -8,19 +8,45 @@ package org.octogonapus.guavautil.collections
 import com.google.common.collect.HashMultimap
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.isEmpty
+import org.junit.jupiter.api.Assertions.assertIterableEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import kotlin.test.assertEquals
 
 internal class ImmutableSetMultimapUtilTest {
 
     @Test
-    fun `test toImmutableSetMultimap`() {
+    fun `test toImmutableSetMultimap with multimap`() {
         val multimap = HashMultimap.create<Int, Int>()
         multimap.put(0, 1)
 
         val immutableMultimap = multimap.toImmutableSetMultimap()
 
         assertEquals(multimap.asMap(), immutableMultimap.asMap())
+    }
+
+    @Test
+    fun `test toImmutableSetMultimap with iterable`() {
+        val multimap = immutableListOf(
+            0 to immutableListOf(1)
+        )
+
+        val immutableMultimap = multimap.toImmutableSetMultimap()
+
+        assertAll(
+            {
+                assertIterableEquals(
+                    mapOf(0 to listOf(1)).keys,
+                    immutableMultimap.asMap().keys
+                )
+            },
+            {
+                assertIterableEquals(
+                    mapOf(0 to listOf(1)).values,
+                    immutableMultimap.asMap().values
+                )
+            }
+        )
     }
 
     @Test

@@ -11,7 +11,27 @@ import com.google.common.collect.Multimap
 fun <K, V> Multimap<K, V>.toImmutableSetMultimap(): ImmutableSetMultimap<K, V> =
     ImmutableSetMultimap.copyOf(this)
 
+fun <K, V> Iterable<Pair<K, Iterable<V>>>.toImmutableSetMultimap(): ImmutableSetMultimap<K, V> =
+    immutableSetMultimapOf(
+        flatMap { key ->
+            key.second.map { value ->
+                key.first to value
+            }
+        }
+    )
+
+fun <K, V> immutableSetMultimapOf(pairs: Iterable<Pair<K, V>>): ImmutableSetMultimap<K, V> {
+    val builder = ImmutableSetMultimap.builder<K, V>()
+
+    pairs.forEach {
+        builder.put(it.first, it.second)
+    }
+
+    return builder.build()
+}
+
 fun <K, V> immutableSetMultimapOf(vararg pairs: Pair<K, V>): ImmutableSetMultimap<K, V> {
+    // Don't turn pairs into a list to save a copy
     val builder = ImmutableSetMultimap.builder<K, V>()
 
     pairs.forEach {
