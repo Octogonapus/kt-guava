@@ -25,7 +25,7 @@ plugins {
 
 object Versions {
     const val ktlintVersion = "0.29.0"
-    const val ktGuavaVersion = "0.0.3"
+    const val ktGuavaVersion = "0.0.4"
 }
 
 allprojects {
