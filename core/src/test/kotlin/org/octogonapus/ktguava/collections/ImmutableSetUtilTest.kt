@@ -27,6 +27,13 @@ internal class ImmutableSetUtilTest {
     }
 
     @Test
+    fun `test toImmutableSet with array`() {
+        val setBefore = arrayOf(1, 2, 1, 3)
+        val setAfter = setBefore.toImmutableSet()
+        assertEquals(setBefore.toSet(), setAfter)
+    }
+
+    @Test
     fun `test immutableSetOf`() {
         val usingSet = setOf(1, 2, 1, 3)
         val usingImmutableSet = immutableSetOf(1, 2, 1, 3)

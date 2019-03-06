@@ -36,7 +36,7 @@ fun <N : Any, V : Any, R : Any> ImmutableValueGraph<N, V>.mapNodes(
     transform: (N) -> R
 ): ImmutableValueGraph<R, V> = mapValueGraphNodes(transform).toImmutableValueGraph()
 
-@Suppress("UnstableApiUsage")
+@Suppress("UnstableApiUsage", "MapGetWithNotNullAssertionOperator")
 private fun <N : Any, R : Any, V : Any> ValueGraph<N, V>.mapValueGraphNodes(
     transform: (N) -> R
 ): MutableValueGraph<R, V> {

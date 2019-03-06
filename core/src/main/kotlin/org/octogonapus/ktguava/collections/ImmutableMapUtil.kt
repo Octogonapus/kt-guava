@@ -11,6 +11,8 @@ fun <K, V> Map<K, V>.toImmutableMap(): ImmutableMap<K, V> = ImmutableMap.copyOf(
 
 fun <K, V> Iterable<Pair<K, V>>.toImmutableMap(): ImmutableMap<K, V> = ImmutableMap.copyOf(toMap())
 
+fun <K, V> Array<Pair<K, V>>.toImmutableMap(): ImmutableMap<K, V> = ImmutableMap.copyOf(toMap())
+
 fun <K, V> immutableMapOf(vararg elements: Pair<K, V>): ImmutableMap<K, V> =
     ImmutableMap.copyOf(elements.toMap())
 

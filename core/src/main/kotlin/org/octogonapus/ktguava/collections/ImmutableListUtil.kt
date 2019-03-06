@@ -9,6 +9,8 @@ import com.google.common.collect.ImmutableList
 
 fun <T> Iterable<T>.toImmutableList(): ImmutableList<T> = ImmutableList.copyOf(this)
 
+fun <T> Array<T>.toImmutableList(): ImmutableList<T> = ImmutableList.copyOf(this)
+
 fun <T> immutableListOf(vararg elements: T): ImmutableList<T> =
     ImmutableList.copyOf(elements.toList())
 

@@ -28,7 +28,9 @@ internal class ImmutableListMultimapUtilTest {
     @Test
     fun `test toImmutableListMultimap with iterable`() {
         val multimap = immutableListOf(
-            0 to immutableListOf(1)
+            0 to immutableListOf(1),
+            0 to immutableListOf(1),
+            0 to immutableListOf(2)
         )
 
         val immutableMultimap = multimap.toImmutableListMultimap()
@@ -36,14 +38,14 @@ internal class ImmutableListMultimapUtilTest {
         assertAll(
             {
                 assertIterableEquals(
-                    mapOf(0 to listOf(1)).keys,
-                    immutableMultimap.asMap().toMap().keys
+                    setOf(0),
+                    immutableMultimap.keySet()
                 )
             },
             {
                 assertIterableEquals(
-                    mapOf(0 to listOf(1)).values,
-                    immutableMultimap.asMap().toMap().values
+                    listOf(1, 1, 2),
+                    immutableMultimap.values()
                 )
             }
         )

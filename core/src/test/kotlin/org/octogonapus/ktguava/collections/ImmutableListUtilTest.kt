@@ -27,6 +27,13 @@ internal class ImmutableListUtilTest {
     }
 
     @Test
+    fun `test toImmutableList with array`() {
+        val setBefore = arrayOf(1, 2, 3)
+        val listAfter = setBefore.toImmutableList()
+        assertEquals(setBefore.toList(), listAfter)
+    }
+
+    @Test
     fun `test immutableListOf`() {
         val usingList = listOf(1, 2, 3)
         val usingImmutableList = immutableListOf(1, 2, 3)

@@ -20,6 +20,13 @@ internal class ImmutableMapUtilTest {
     }
 
     @Test
+    fun `test toImmutableMap with array`() {
+        val manualMap = arrayOf(1 to 2, 3 to 4)
+        val immutableMap = manualMap.toImmutableMap()
+        assertEquals(mapOf(1 to 2, 3 to 4), immutableMap)
+    }
+
+    @Test
     fun `test toImmutableMap with iterable of pairs`() {
         val manualMap = mapOf(1 to 2, 3 to 4)
         val immutableMap = listOf(1 to 2, 3 to 4).toImmutableMap()
