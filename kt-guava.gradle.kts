@@ -1,6 +1,7 @@
 import Kt_guava_gradle.Strings.spotlessLicenseHeaderDelimiter
 import Kt_guava_gradle.Versions.ktGuavaVersion
 import Kt_guava_gradle.Versions.ktlintVersion
+import com.adarshr.gradle.testlogger.theme.ThemeType
 import com.github.spotbugs.SpotBugsTask
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
@@ -19,6 +20,7 @@ plugins {
     `maven-publish`
     id("com.jfrog.bintray") version "1.8.3"
     `java-library`
+    id("com.adarshr.test-logger") version "1.6.0"
 }
 
 object Versions {
@@ -65,6 +67,7 @@ buildscript {
 allprojects {
     apply {
         plugin("com.diffplug.gradle.spotless")
+        plugin("com.adarshr.test-logger")
     }
 
     repositories {
@@ -85,6 +88,10 @@ allprojects {
             showStandardStreams = true
             exceptionFormat = TestExceptionFormat.FULL
         }
+    }
+
+    testlogger {
+        theme = ThemeType.STANDARD_PARALLEL
     }
 
     spotless {
