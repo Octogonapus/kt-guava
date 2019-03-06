@@ -1,4 +1,3 @@
-
 import Kt_guava_gradle.Strings.spotlessLicenseHeaderDelimiter
 import Kt_guava_gradle.Versions.ktGuavaVersion
 import Kt_guava_gradle.Versions.ktlintVersion

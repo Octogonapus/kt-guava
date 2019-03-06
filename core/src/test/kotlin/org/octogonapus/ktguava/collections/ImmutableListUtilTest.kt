@@ -3,7 +3,7 @@
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  */
-package org.octogonapus.guavautil.collections
+package org.octogonapus.ktguava.collections
 
 import com.natpryce.hamkrest.assertion.assertThat
 import com.natpryce.hamkrest.isEmpty
@@ -41,7 +41,10 @@ internal class ImmutableListUtilTest {
     @Test
     fun `test plus`() {
         val manualList = listOf(1, 2, 3, 4)
-        val immutableList = immutableListOf(1, 2) + immutableListOf(3, 4)
+        val immutableList = immutableListOf(
+            1,
+            2
+        ) + immutableListOf(3, 4)
         assertEquals(manualList, immutableList)
     }
 
@@ -52,7 +55,11 @@ internal class ImmutableListUtilTest {
         val manualDifference = manualList1.toMutableList()
         manualDifference.removeAll(manualList2)
 
-        val immutableList = immutableListOf(1, 2, 3) - immutableListOf(2)
+        val immutableList = immutableListOf(
+            1,
+            2,
+            3
+        ) - immutableListOf(2)
 
         assertEquals(manualDifference, immutableList)
     }
