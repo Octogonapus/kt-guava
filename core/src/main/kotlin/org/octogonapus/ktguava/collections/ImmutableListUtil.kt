@@ -9,20 +9,20 @@ import com.google.common.collect.ImmutableList
 
 fun <T> Iterable<T>.toImmutableList(): ImmutableList<T> = ImmutableList.copyOf(this)
 
-fun <T> Array<T>.toImmutableList(): ImmutableList<T> = ImmutableList.copyOf(this)
+fun <T> Array<out T>.toImmutableList(): ImmutableList<T> = ImmutableList.copyOf(this)
 
 fun <T> immutableListOf(vararg elements: T): ImmutableList<T> =
     ImmutableList.copyOf(elements.toList())
 
 fun <T> emptyImmutableList(): ImmutableList<T> = ImmutableList.of()
 
-operator fun <T> ImmutableList<T>.plus(other: Iterable<T>): ImmutableList<T> =
+operator fun <T> ImmutableList<out T>.plus(other: Iterable<T>): ImmutableList<T> =
     ImmutableList.builder<T>()
         .addAll(this)
         .addAll(other)
         .build()
 
-operator fun <T> ImmutableList<T>.minus(other: Iterable<T>): ImmutableList<T> =
+operator fun <T> ImmutableList<out T>.minus(other: Iterable<T>): ImmutableList<T> =
     toMutableList().apply {
         removeAll(other)
     }.toImmutableList()

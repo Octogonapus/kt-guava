@@ -8,7 +8,7 @@ package org.octogonapus.ktguava.collections
 import com.google.common.collect.ImmutableListMultimap
 import com.google.common.collect.Multimap
 
-fun <K, V> Multimap<K, V>.toImmutableListMultimap(): ImmutableListMultimap<K, V> =
+fun <K, V> Multimap<out K, out V>.toImmutableListMultimap(): ImmutableListMultimap<K, V> =
     ImmutableListMultimap.copyOf(this)
 
 fun <K, V> Iterable<Pair<K, Iterable<V>>>.toImmutableListMultimap(): ImmutableListMultimap<K, V> =
@@ -43,7 +43,7 @@ fun <K, V> immutableListMultimapOf(vararg pairs: Pair<K, V>): ImmutableListMulti
 
 fun <K, V> emptyImmutableListMultimap(): ImmutableListMultimap<K, V> = ImmutableListMultimap.of()
 
-operator fun <K, V> ImmutableListMultimap<K, V>.plus(other: Multimap<K, V>):
+operator fun <K, V> ImmutableListMultimap<out K, out V>.plus(other: Multimap<K, V>):
     ImmutableListMultimap<K, V> =
     ImmutableListMultimap.builder<K, V>()
         .putAll(this)
@@ -51,7 +51,7 @@ operator fun <K, V> ImmutableListMultimap<K, V>.plus(other: Multimap<K, V>):
         .build()
 
 @Suppress("UnstableApiUsage")
-operator fun <K, V> ImmutableListMultimap<K, V>.plus(other: Iterable<Map.Entry<K, V>>):
+operator fun <K, V> ImmutableListMultimap<out K, out V>.plus(other: Iterable<Map.Entry<K, V>>):
     ImmutableListMultimap<K, V> =
     ImmutableListMultimap.builder<K, V>()
         .putAll(this)

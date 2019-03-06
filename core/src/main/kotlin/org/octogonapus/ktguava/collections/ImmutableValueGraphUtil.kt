@@ -21,7 +21,7 @@ fun <N : Any, V : Any> ValueGraph<N, V>.toImmutableValueGraph(): ImmutableValueG
  * @return A graph with mapped nodes.
  */
 @Suppress("UnstableApiUsage")
-fun <N : Any, V : Any, R : Any> ValueGraph<N, V>.mapNodes(
+fun <N : Any, V : Any, R : Any> ValueGraph<out N, out V>.mapNodes(
     transform: (N) -> R
 ): ValueGraph<R, V> = mapValueGraphNodes(transform)
 
@@ -32,12 +32,12 @@ fun <N : Any, V : Any, R : Any> ValueGraph<N, V>.mapNodes(
  * @return A graph with mapped nodes.
  */
 @Suppress("UnstableApiUsage")
-fun <N : Any, V : Any, R : Any> ImmutableValueGraph<N, V>.mapNodes(
+fun <N : Any, V : Any, R : Any> ImmutableValueGraph<N, out V>.mapNodes(
     transform: (N) -> R
 ): ImmutableValueGraph<R, V> = mapValueGraphNodes(transform).toImmutableValueGraph()
 
 @Suppress("UnstableApiUsage", "MapGetWithNotNullAssertionOperator")
-private fun <N : Any, R : Any, V : Any> ValueGraph<N, V>.mapValueGraphNodes(
+private fun <N : Any, R : Any, V : Any> ValueGraph<N, out V>.mapValueGraphNodes(
     transform: (N) -> R
 ): MutableValueGraph<R, V> {
     val builder = if (isDirected) ValueGraphBuilder.directed() else ValueGraphBuilder.undirected()

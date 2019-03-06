@@ -8,7 +8,7 @@ package org.octogonapus.ktguava.collections
 import com.google.common.collect.ImmutableSetMultimap
 import com.google.common.collect.Multimap
 
-fun <K, V> Multimap<K, V>.toImmutableSetMultimap(): ImmutableSetMultimap<K, V> =
+fun <K, V> Multimap<out K, V>.toImmutableSetMultimap(): ImmutableSetMultimap<K, V> =
     ImmutableSetMultimap.copyOf(this)
 
 fun <K, V> Iterable<Pair<K, Iterable<V>>>.toImmutableSetMultimap(): ImmutableSetMultimap<K, V> =
@@ -51,7 +51,7 @@ operator fun <K, V> ImmutableSetMultimap<K, V>.plus(other: Multimap<K, V>):
         .build()
 
 @Suppress("UnstableApiUsage")
-operator fun <K, V> ImmutableSetMultimap<K, V>.plus(other: Iterable<Map.Entry<K, V>>):
+operator fun <K, V> ImmutableSetMultimap<out K, out V>.plus(other: Iterable<Map.Entry<K, V>>):
     ImmutableSetMultimap<K, V> =
     ImmutableSetMultimap.builder<K, V>()
         .putAll(this)

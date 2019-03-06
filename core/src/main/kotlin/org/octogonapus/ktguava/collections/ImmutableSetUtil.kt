@@ -9,19 +9,19 @@ import com.google.common.collect.ImmutableSet
 
 fun <T> Iterable<T>.toImmutableSet(): ImmutableSet<T> = ImmutableSet.copyOf(this)
 
-fun <T> Array<T>.toImmutableSet(): ImmutableSet<T> = ImmutableSet.copyOf(this)
+fun <T> Array<out T>.toImmutableSet(): ImmutableSet<T> = ImmutableSet.copyOf(this)
 
 fun <T> immutableSetOf(vararg elements: T): ImmutableSet<T> = ImmutableSet.copyOf(elements.toSet())
 
 fun <T> emptyImmutableSet(): ImmutableSet<T> = ImmutableSet.of()
 
-operator fun <T> ImmutableSet<T>.plus(other: Iterable<T>): ImmutableSet<T> =
+operator fun <T> ImmutableSet<out T>.plus(other: Iterable<T>): ImmutableSet<T> =
     ImmutableSet.builder<T>()
         .addAll(this)
         .addAll(other)
         .build()
 
-operator fun <T> ImmutableSet<T>.minus(other: Iterable<T>): ImmutableSet<T> =
+operator fun <T> ImmutableSet<out T>.minus(other: Iterable<T>): ImmutableSet<T> =
     toMutableSet().apply {
         removeAll(other)
     }.toImmutableSet()

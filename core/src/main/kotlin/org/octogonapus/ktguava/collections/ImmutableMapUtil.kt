@@ -7,7 +7,7 @@ package org.octogonapus.ktguava.collections
 
 import com.google.common.collect.ImmutableMap
 
-fun <K, V> Map<K, V>.toImmutableMap(): ImmutableMap<K, V> = ImmutableMap.copyOf(toMap())
+fun <K, V> Map<out K, V>.toImmutableMap(): ImmutableMap<K, V> = ImmutableMap.copyOf(toMap())
 
 fun <K, V> Iterable<Pair<K, V>>.toImmutableMap(): ImmutableMap<K, V> = ImmutableMap.copyOf(toMap())
 
