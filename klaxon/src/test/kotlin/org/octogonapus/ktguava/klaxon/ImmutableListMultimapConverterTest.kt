@@ -8,6 +8,7 @@ package org.octogonapus.ktguava.klaxon
 import com.beust.klaxon.Klaxon
 import com.google.common.collect.ImmutableListMultimap
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.octogonapus.ktguava.collections.immutableListMultimapOf
 
@@ -20,6 +21,13 @@ internal class ImmutableListMultimapConverterTest {
 
     private val klaxon = Klaxon().also {
         it.fieldConverter(ConvertImmutableListMultimap::class, it.immutableListMultimapConverter())
+    }
+
+    @Test
+    fun `test canConvert`() {
+        assertTrue(
+            klaxon.immutableListMultimapConverter().canConvert(ImmutableListMultimap::class.java)
+        )
     }
 
     @Test

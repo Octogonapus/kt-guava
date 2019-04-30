@@ -8,6 +8,7 @@ package org.octogonapus.ktguava.klaxon
 import com.beust.klaxon.Klaxon
 import com.google.common.collect.ImmutableMap
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.octogonapus.ktguava.collections.immutableMapOf
 
@@ -20,6 +21,11 @@ internal class ImmutableMapConverterTest {
 
     private val klaxon = Klaxon().also {
         it.fieldConverter(ConvertImmutableMap::class, it.immutableMapConverter())
+    }
+
+    @Test
+    fun `test canConvert`() {
+        assertTrue(klaxon.immutableMapConverter().canConvert(ImmutableMap::class.java))
     }
 
     @Test

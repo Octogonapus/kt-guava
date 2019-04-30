@@ -8,6 +8,7 @@ package org.octogonapus.ktguava.klaxon
 import com.beust.klaxon.Klaxon
 import com.google.common.collect.ImmutableSet
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.octogonapus.ktguava.collections.immutableSetOf
 
@@ -20,6 +21,11 @@ internal class ImmutableSetConverterTest {
 
     private val klaxon = Klaxon().also {
         it.fieldConverter(ConvertImmutableSet::class, it.immutableSetConverter())
+    }
+
+    @Test
+    fun `test canConvert`() {
+        assertTrue(klaxon.immutableSetConverter().canConvert(ImmutableSet::class.java))
     }
 
     @Test
