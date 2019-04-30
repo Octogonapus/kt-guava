@@ -44,7 +44,8 @@ val kotlinProjects = setOf(
 val javaProjects = setOf<Project>() + kotlinProjects
 
 val publishedProjects = setOf(
-    coreProject
+    coreProject,
+    klaxonProject
 )
 
 object Versions {
