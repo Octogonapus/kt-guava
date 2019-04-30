@@ -26,7 +26,11 @@ internal class ImmutableMapConverterTest {
     fun `test converting to json`() {
         assertEquals(
             """{"map" : {"a": "b"}}""",
-            klaxon.toJsonString(TestData(immutableMapOf("a" to "b")))
+            klaxon.toJsonString(
+                TestData(
+                    immutableMapOf("a" to "b")
+                )
+            )
         )
     }
 

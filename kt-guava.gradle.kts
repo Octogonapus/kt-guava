@@ -34,9 +34,11 @@ allprojects {
 }
 
 val coreProject = project(":core")
+val klaxonProject = project(":klaxon")
 
 val kotlinProjects = setOf(
-    coreProject
+    coreProject,
+    klaxonProject
 )
 
 val javaProjects = setOf<Project>() + kotlinProjects

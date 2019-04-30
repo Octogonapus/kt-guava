@@ -26,14 +26,23 @@ internal class ImmutableListConverterTest {
     fun `test converting to json`() {
         assertEquals(
             """{"list" : ["a", "b"]}""",
-            klaxon.toJsonString(TestData(immutableListOf("a", "b")))
+            klaxon.toJsonString(
+                TestData(
+                    immutableListOf("a", "b")
+                )
+            )
         )
     }
 
     @Test
     fun `test converting from json`() {
         assertEquals(
-            TestData(immutableListOf("a", "b")),
+            TestData(
+                immutableListOf(
+                    "a",
+                    "b"
+                )
+            ),
             klaxon.parse<TestData>("""{"list" : ["a", "b"]}""")
         )
     }

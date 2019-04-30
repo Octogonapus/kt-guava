@@ -26,14 +26,23 @@ internal class ImmutableSetConverterTest {
     fun `test converting to json`() {
         assertEquals(
             """{"set" : ["a", "b"]}""",
-            klaxon.toJsonString(TestData(immutableSetOf("a", "b", "a")))
+            klaxon.toJsonString(
+                TestData(
+                    immutableSetOf("a", "b", "a")
+                )
+            )
         )
     }
 
     @Test
     fun `test converting from json`() {
         assertEquals(
-            TestData(immutableSetOf("a", "b")),
+            TestData(
+                immutableSetOf(
+                    "a",
+                    "b"
+                )
+            ),
             klaxon.parse<TestData>("""{"set" : ["a", "b", "a"]}""")
         )
     }
