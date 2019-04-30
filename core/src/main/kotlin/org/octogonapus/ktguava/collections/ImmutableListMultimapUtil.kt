@@ -20,6 +20,9 @@ fun <K, V> Iterable<Pair<K, Iterable<V>>>.toImmutableListMultimap(): ImmutableLi
         }
     )
 
+fun <K, V> Map<K, Iterable<V>>.toImmutableListMultimap(): ImmutableListMultimap<K, V> =
+    entries.map { it.toPair() }.toImmutableListMultimap()
+
 fun <K, V> immutableListMultimapOf(pairs: Iterable<Pair<K, V>>): ImmutableListMultimap<K, V> {
     val builder = ImmutableListMultimap.builder<K, V>()
 
