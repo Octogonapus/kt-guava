@@ -52,6 +52,33 @@ internal class ImmutableListMultimapUtilTest {
     }
 
     @Test
+    fun `test toImmutableListMultimap with map of iterables`() {
+        val multimap = immutableListMultimapOf(
+            0 to 1,
+            0 to 1,
+            0 to 2
+        )
+
+        val map = multimap.asMap()
+        val actual = map.toImmutableListMultimap()
+
+        assertAll(
+            {
+                assertIterableEquals(
+                    setOf(0),
+                    actual.keySet()
+                )
+            },
+            {
+                assertIterableEquals(
+                    listOf(1, 1, 2),
+                    actual.values()
+                )
+            }
+        )
+    }
+
+    @Test
     fun `test immutableListMultimapOf`() {
         val multimap = ArrayListMultimap.create<Int, Int>()
         multimap.put(0, 1)
