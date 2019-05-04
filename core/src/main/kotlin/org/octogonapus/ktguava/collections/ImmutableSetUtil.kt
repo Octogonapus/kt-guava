@@ -25,3 +25,19 @@ operator fun <T> ImmutableSet<out T>.minus(other: Iterable<T>): ImmutableSet<T> 
     toMutableSet().apply {
         removeAll(other)
     }.toImmutableSet()
+
+fun ByteArray.toImmutableSet(): ImmutableSet<Byte> = toSet().toImmutableSet()
+
+fun CharArray.toImmutableSet(): ImmutableSet<Char> = toSet().toImmutableSet()
+
+fun ShortArray.toImmutableSet(): ImmutableSet<Short> = toSet().toImmutableSet()
+
+fun IntArray.toImmutableSet(): ImmutableSet<Int> = toSet().toImmutableSet()
+
+fun LongArray.toImmutableSet(): ImmutableSet<Long> = toSet().toImmutableSet()
+
+fun FloatArray.toImmutableSet(): ImmutableSet<Float> = toSet().toImmutableSet()
+
+fun DoubleArray.toImmutableSet(): ImmutableSet<Double> = toSet().toImmutableSet()
+
+fun BooleanArray.toImmutableSet(): ImmutableSet<Boolean> = toSet().toImmutableSet()

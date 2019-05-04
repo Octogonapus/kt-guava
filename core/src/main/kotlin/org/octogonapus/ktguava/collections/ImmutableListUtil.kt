@@ -26,3 +26,19 @@ operator fun <T> ImmutableList<out T>.minus(other: Iterable<T>): ImmutableList<T
     toMutableList().apply {
         removeAll(other)
     }.toImmutableList()
+
+fun ByteArray.toImmutableList(): ImmutableList<Byte> = toList().toImmutableList()
+
+fun CharArray.toImmutableList(): ImmutableList<Char> = toList().toImmutableList()
+
+fun ShortArray.toImmutableList(): ImmutableList<Short> = toList().toImmutableList()
+
+fun IntArray.toImmutableList(): ImmutableList<Int> = toList().toImmutableList()
+
+fun LongArray.toImmutableList(): ImmutableList<Long> = toList().toImmutableList()
+
+fun FloatArray.toImmutableList(): ImmutableList<Float> = toList().toImmutableList()
+
+fun DoubleArray.toImmutableList(): ImmutableList<Double> = toList().toImmutableList()
+
+fun BooleanArray.toImmutableList(): ImmutableList<Boolean> = toList().toImmutableList()
