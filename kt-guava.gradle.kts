@@ -338,35 +338,6 @@ configure(kotlinProjects) {
     }
 }
 
-configure(javaProjects + kotlinProjects) {
-    @Suppress("UnstableApiUsage")
-    val createPropertiesTask = tasks.register("createProperties") {
-        dependsOn("processResources")
-        doLast {
-            val propFileDir = Paths.get(
-                buildDir.path,
-                "resources",
-                "main"
-            ).toFile().apply {
-                mkdirs()
-            }
-
-            val propFile = Paths.get(
-                propFileDir.path,
-                "version.properties"
-            ).toFile()
-
-            val prop = Properties()
-            prop["version"] = version as String
-            prop.store(propFile.outputStream(), null)
-        }
-    }
-
-    tasks.named("classes") {
-        dependsOn(createPropertiesTask)
-    }
-}
-
 configure(publishedProjects) {
     apply {
         plugin("com.jfrog.bintray")
