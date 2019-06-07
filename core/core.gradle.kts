@@ -9,11 +9,15 @@ checkstyle {
 }
 
 dependencies {
-    implementation(
+    api(
         group = "com.google.guava",
         name = "guava",
         version = property("guava.version") as String
     )
 
-    testImplementation(group = "com.natpryce", name = "hamkrest", version = "1.4.2.2")
+    testImplementation(
+        group = "com.natpryce",
+        name = "hamkrest",
+        version = property("hamkrest.version") as String
+    )
 }
