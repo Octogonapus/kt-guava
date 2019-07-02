@@ -6,6 +6,7 @@
 package org.octogonapus.ktguava.collections
 
 import com.google.common.graph.MutableValueGraph
+import com.google.common.graph.ValueGraph
 import com.google.common.graph.ValueGraphBuilder
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertAll
@@ -17,34 +18,54 @@ internal class ImmutableValueGraphUtilTest {
     fun `test toImmutableValueGraph`() {
         val graph = makeMockValueGraph()
         val immutableGraph = graph.toImmutableValueGraph()
-
-        assertAll(
-            { assertEquals(graph.nodes(), immutableGraph.nodes()) },
-            { assertEquals(graph.edges(), immutableGraph.edges()) }
-        )
+        assertValueGraphsAreEqual(graph, immutableGraph)
     }
 
     @Test
     fun `test mapNodes with mutable receiver`() {
-        val graph = makeMockValueGraph()
-        val graphMapped = graph.mapNodes { it + 1 }
-
-        assertEquals(graphMapped.nodes(), setOf(1, 2))
+        val graphMapped = makeMockValueGraph(listOf(0, 1)).mapNodes { it + 1 }
+        val expected = makeMockValueGraph(listOf(1, 2))
+        assertValueGraphsAreEqual(expected, graphMapped)
     }
 
     @Test
     fun `test mapNodes with immutable receiver`() {
-        val graph = makeMockValueGraph()
-        val graphMapped = graph.toImmutableValueGraph().mapNodes { it + 1 }
-
-        assertEquals(graphMapped.nodes(), setOf(1, 2))
+        val graphMapped = makeMockValueGraph(listOf(0, 1))
+            .toImmutableValueGraph()
+            .mapNodes { it + 1 }
+        val expected = makeMockValueGraph(listOf(1, 2))
+        assertValueGraphsAreEqual(expected, graphMapped)
     }
 
     @Suppress("UnstableApiUsage")
-    private fun makeMockValueGraph(): MutableValueGraph<Int, Int> =
+    private fun makeMockValueGraph(
+        nodeValues: List<Int> = listOf(0, 1),
+        edgeValues: List<Int> = listOf(1)
+    ): MutableValueGraph<Int, Int> =
         ValueGraphBuilder.undirected().build<Int, Int>().apply {
-            addNode(0)
-            addNode(1)
-            putEdgeValue(0, 1, 1)
+            nodeValues.forEach { addNode(it) }
+            nodeValues.chunked(2)
+                .map { it[0] to it[1] }
+                .zip(edgeValues)
+                .forEach { (nodes, edge) ->
+                    putEdgeValue(nodes.first, nodes.second, edge)
+                }
         }
+
+    @Suppress("UnstableApiUsage")
+    private fun <N : Any, V : Any> assertValueGraphsAreEqual(
+        expected: ValueGraph<N, V>,
+        actual: ValueGraph<N, V>
+    ) {
+        assertAll(
+            { assertEquals(expected.nodes(), actual.nodes()) },
+            { assertEquals(expected.edges(), actual.edges()) },
+            {
+                assertEquals(
+                    expected.nodes().flatMap { expected.incidentEdges(it) }.toSet(),
+                    actual.nodes().flatMap { actual.incidentEdges(it) }.toSet()
+                )
+            }
+        )
+    }
 }

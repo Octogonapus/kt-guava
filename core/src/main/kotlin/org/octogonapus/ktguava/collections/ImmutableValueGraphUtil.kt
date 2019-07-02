@@ -32,7 +32,7 @@ fun <N : Any, V : Any, R : Any> ValueGraph<out N, out V>.mapNodes(
  * @return A graph with mapped nodes.
  */
 @Suppress("UnstableApiUsage")
-fun <N : Any, V : Any, R : Any> ImmutableValueGraph<N, out V>.mapNodes(
+fun <N : Any, V : Any, R : Any> ImmutableValueGraph<out N, out V>.mapNodes(
     transform: (N) -> R
 ): ImmutableValueGraph<R, V> = mapValueGraphNodes(transform).toImmutableValueGraph()
 
@@ -40,13 +40,15 @@ fun <N : Any, V : Any, R : Any> ImmutableValueGraph<N, out V>.mapNodes(
 private fun <N : Any, R : Any, V : Any> ValueGraph<N, out V>.mapValueGraphNodes(
     transform: (N) -> R
 ): MutableValueGraph<R, V> {
+    val nodes = nodes()
+    val edges = edges()
     val builder = if (isDirected) ValueGraphBuilder.directed() else ValueGraphBuilder.undirected()
-    val mutableGraph = builder.expectedNodeCount(nodes().size).build<R, V>()
-    val nodesRemapped = nodes().map { it to transform(it) }.toMap()
+    val mutableGraph = builder.expectedNodeCount(nodes.size).build<R, V>()
+    val nodesRemapped = nodes.map { it to transform(it) }.toMap()
 
     nodesRemapped.values.forEach { mutableGraph.addNode(it) }
 
-    edges().forEach {
+    edges.forEach {
         // We just put these elements in the `nodesRemapped` above. They MUST be in the map.
         val newNodeU = nodesRemapped[it.nodeU()]!!
         val newNodeV = nodesRemapped[it.nodeV()]!!
