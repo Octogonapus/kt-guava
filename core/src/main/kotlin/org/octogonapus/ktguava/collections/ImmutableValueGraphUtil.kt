@@ -43,9 +43,11 @@ private fun <N : Any, R : Any, V : Any> ValueGraph<N, out V>.mapValueGraphNodes(
     val nodes = nodes()
     val edges = edges()
     val builder = if (isDirected) ValueGraphBuilder.directed() else ValueGraphBuilder.undirected()
-    val mutableGraph = builder.expectedNodeCount(nodes.size).build<R, V>()
-    val nodesRemapped = nodes.map { it to transform(it) }.toMap()
+    val mutableGraph = builder.expectedNodeCount(nodes.size)
+        .allowsSelfLoops(allowsSelfLoops())
+        .build<R, V>()
 
+    val nodesRemapped = nodes.map { it to transform(it) }.toMap()
     nodesRemapped.values.forEach { mutableGraph.addNode(it) }
 
     edges.forEach {

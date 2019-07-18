@@ -33,6 +33,8 @@ private fun <N : Any, E : Any, R : Any> Network<N, E>.mapNetworkNodes(
     val builder = if (isDirected) NetworkBuilder.directed() else NetworkBuilder.undirected()
     val mutableNetwork = builder.expectedNodeCount(nodes.size)
         .expectedEdgeCount(edges.size)
+        .allowsParallelEdges(allowsParallelEdges())
+        .allowsSelfLoops(allowsSelfLoops())
         .build<R, E>()
 
     edges.forEach { edge ->

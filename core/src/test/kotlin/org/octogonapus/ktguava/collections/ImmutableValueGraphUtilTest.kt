@@ -38,6 +38,22 @@ internal class ImmutableValueGraphUtilTest {
     }
 
     @Suppress("UnstableApiUsage")
+    @Test
+    fun `obeys self loops false`() {
+        val expected = ValueGraphBuilder.directed().allowsSelfLoops(false).build<Int, Int>()
+        val actual = expected.mapNodes { 0 }
+        assertEquals(expected.allowsSelfLoops(), actual.allowsSelfLoops())
+    }
+
+    @Suppress("UnstableApiUsage")
+    @Test
+    fun `obeys self loops true`() {
+        val expected = ValueGraphBuilder.directed().allowsSelfLoops(true).build<Int, Int>()
+        val actual = expected.mapNodes { 0 }
+        assertEquals(expected.allowsSelfLoops(), actual.allowsSelfLoops())
+    }
+
+    @Suppress("UnstableApiUsage")
     private fun makeMockValueGraph(
         nodeValues: List<Int> = listOf(0, 1),
         edgeValues: List<Int> = listOf(1)

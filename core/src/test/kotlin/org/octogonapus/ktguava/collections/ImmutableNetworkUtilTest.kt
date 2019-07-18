@@ -61,6 +61,38 @@ internal class ImmutableNetworkUtilTest {
     }
 
     @Suppress("UnstableApiUsage")
+    @Test
+    fun `obeys parallel edges false`() {
+        val expected = NetworkBuilder.directed().allowsParallelEdges(false).build<Int, Int>()
+        val actual = expected.mapNodes { 0 }
+        assertEquals(expected.allowsParallelEdges(), actual.allowsParallelEdges())
+    }
+
+    @Suppress("UnstableApiUsage")
+    @Test
+    fun `obeys parallel edges true`() {
+        val expected = NetworkBuilder.directed().allowsParallelEdges(true).build<Int, Int>()
+        val actual = expected.mapNodes { 0 }
+        assertEquals(expected.allowsParallelEdges(), actual.allowsParallelEdges())
+    }
+
+    @Suppress("UnstableApiUsage")
+    @Test
+    fun `obeys self loops false`() {
+        val expected = NetworkBuilder.directed().allowsSelfLoops(false).build<Int, Int>()
+        val actual = expected.mapNodes { 0 }
+        assertEquals(expected.allowsSelfLoops(), actual.allowsSelfLoops())
+    }
+
+    @Suppress("UnstableApiUsage")
+    @Test
+    fun `obeys self loops true`() {
+        val expected = NetworkBuilder.directed().allowsSelfLoops(true).build<Int, Int>()
+        val actual = expected.mapNodes { 0 }
+        assertEquals(expected.allowsSelfLoops(), actual.allowsSelfLoops())
+    }
+
+    @Suppress("UnstableApiUsage")
     private fun makeUndirectedMockNetwork(
         nodeValues: List<Int> = listOf(0, 1),
         edgeValues: List<Int> = listOf(1)
